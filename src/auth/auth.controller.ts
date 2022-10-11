@@ -8,16 +8,16 @@ const auth = new AuthService();
 @Controller('/auth')
 class AuthController {
   @Post('/login')
-  login(@Body() { email, password }: LoginDto) {
-    auth.loginService(email, password);
+  async login(@Body() { email, password }: LoginDto) {
+    await auth.loginService(email, password);
   }
   @Post('/register')
-  register(@Body() { email, password }: LoginDto) {
-    auth.registerService(email, password);
+  async register(@Body() { email, password }: LoginDto) {
+    await auth.registerService(email, password);
   }
   @Post('/new-key')
-  generateApiKey() {
-    auth.generateApiKeyService();
+  async generateApiKey() {
+    await auth.generateApiKeyService();
   }
 }
 
