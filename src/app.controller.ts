@@ -6,7 +6,7 @@ const appService = new AppService();
 
 @Controller('/api')
 export class AppController {
-  @Get('/api')
+  @Get('/')
   getAppRoot() {
     return appService.getAppRootService();
   }
