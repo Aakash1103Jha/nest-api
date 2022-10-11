@@ -3,21 +3,21 @@ import { Body, Controller, Post } from '@nestjs/common';
 import AuthService from './auth.service';
 import LoginDto from './dto/login.dto';
 
-const auth = new AuthService();
-
-@Controller('/auth')
+@Controller('/api/auth')
 class AuthController {
+  constructor(public authService: AuthService) {}
+
   @Post('/login')
   async login(@Body() { email, password }: LoginDto) {
-    await auth.loginService(email, password);
+    return await this.authService.loginService(email, password);
   }
   @Post('/register')
   async register(@Body() { email, password }: LoginDto) {
-    await auth.registerService(email, password);
+    return await this.authService.registerService(email, password);
   }
   @Post('/new-key')
   async generateApiKey() {
-    await auth.generateApiKeyService();
+    await this.authService.generateApiKeyService();
   }
 }
 
