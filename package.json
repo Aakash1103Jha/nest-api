@@ -1,10 +1,21 @@
 {
   "name": "nest-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "nest api endpoints for frontend projects.",
+  "author": "Aakash Jha <thedevdesigner@gmail.com> (https://thedevdesigner.com)",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Aakash1103Jha/nest-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aakash1103Jha/nest-api.git/issues"
+  },
+  "readme": "./README.md",
+  "engines": {
+    "node": ">=16.x.x"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
