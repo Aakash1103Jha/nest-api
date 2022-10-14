@@ -5,7 +5,7 @@ import AuthController from './auth.controller';
 import AuthRepository from './auth.repository';
 import AuthService from './auth.service';
 
-import { Auth, AuthSchema } from './auth.schema';
+import { AuthSchema } from './auth.schema';
 
 @Module({
   controllers: [AuthController],

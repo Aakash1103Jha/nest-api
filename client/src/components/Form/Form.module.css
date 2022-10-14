@@ -1,0 +1,7 @@
+.form {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--gray-dark);
+  margin: 2rem auto;
+  max-width: var(--max-width);
+}

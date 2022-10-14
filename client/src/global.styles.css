@@ -1,0 +1,54 @@
+:root {
+  --gray-light: #2d333b;
+  --gray-medium: #22272e;
+  --gray-dark: #1c2128;
+  --green-dark: #2e6535;
+  --green-medium: #347d39;
+  --green-light: #52a057;
+  --text: #cdd9e5;
+  --radius-sm: 0.3rem;
+  --radius-md: 0.5rem;
+  --transition-duration: 0.3s;
+  --max-width: 30rem;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition-duration);
+}
+body {
+  background: var(--gray-light);
+  color: var(--text);
+}
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+a,
+button,
+input,
+textarea,
+li {
+  font-size: calc(0.8rem + 0.1vmin);
+}
+button,
+svg {
+  cursor: pointer;
+}
+.error {
+  color: red;
+  text-align: center;
+  margin: 0.5rem 0rem 1.5rem 0rem;
+}
+._main_ {
+  padding: 1.5rem;
+}
+._main_ div form h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+  box-shadow: inset 0px -3px var(--gray-light);
+  padding-bottom: 1rem;
+}

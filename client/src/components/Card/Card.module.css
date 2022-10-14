@@ -1,0 +1,10 @@
+.card {
+  max-width: var(--max-width);
+  width: 100%;
+  word-wrap: break-word;
+  background: var(--gray-dark);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  margin: 0rem auto;
+  color: inherit;
+}
