@@ -7,11 +7,12 @@ import { Model } from 'mongoose';
 class AuthRepository {
   constructor(@InjectModel('auth') private authModel: Model<AuthDocument>) {}
 
-  async findUser(email: string) {}
+  async findUser(email: string) {
+    const _user = await this.authModel.findOne({ email });
+    return _user;
+  }
 
-  async loginUser(email: string, password: string) {}
-
-  async registerUser(email: string, password: string) {
+  async createNewUser(email: string, password: string) {
     const _user = new this.authModel({
       email,
       password,
