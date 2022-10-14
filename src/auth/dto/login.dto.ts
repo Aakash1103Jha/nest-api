@@ -4,9 +4,9 @@ class LoginDto {
   @IsNotEmpty()
   @IsString()
   email: string;
-  @IsNotEmpty()
+  // @IsNotEmpty()
   @IsString()
-  @Length(8)
+  // @Length(8)
   password: string;
 }
 
