@@ -12,14 +12,25 @@ const Main: FC = () => {
     await navigator.clipboard.writeText(token);
   };
 
+  const clearState = () => {
+    setApiToken('');
+    setError('');
+  };
+
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    clearState();
     e.preventDefault();
     const _res = await fetch('http://localhost:4002/api/auth/login', {
       body: JSON.stringify({ email, password }),
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
-    const res = await _res.json();
-    console.log(res);
+    if (_res.status === 500) return setError('Something went wrong!');
+    const resData = await _res.json();
+    console.log({ resData });
+    return setApiToken(resData.data);
   };
 
   return (

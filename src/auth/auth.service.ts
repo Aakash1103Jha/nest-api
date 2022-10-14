@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { hash, genSalt, compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { Error } from 'mongoose';
@@ -12,11 +16,9 @@ class AuthService {
   async loginService(email: string, password: string) {
     try {
       const _user = await this.authRepo.findUser(email);
-      if (!_user)
-        return { status: 400, success: false, message: 'User does not exist' };
+      if (!_user) throw new BadRequestException('User does not exist');
       const isValidPassword = await compare(password, _user.password);
-      if (!isValidPassword)
-        return { status: 400, success: false, message: 'Incorrect password' };
+      if (!isValidPassword) throw new BadRequestException('Incorrect password');
       const AUTH_TOKEN = sign(
         { _id: _user._id, email: _user.email },
         process.env.AUTH_SECRET,
@@ -33,16 +35,14 @@ class AuthService {
         data: AUTH_TOKEN,
       };
     } catch (error) {
-      const { message } = error as Error;
-      return { status: 500, success: false, message };
+      throw new InternalServerErrorException((error as Error).message);
     }
   }
 
   async registerService(email: string, password: string) {
     try {
       const _user = await this.authRepo.findUser(email);
-      if (_user)
-        return { status: 400, success: false, message: 'Email already in use' };
+      if (_user) throw new BadRequestException('Email already in use');
       const hashPassword = await hash(password, await genSalt(10));
       const newUser = await this.authRepo.createNewUser(email, hashPassword);
       return {
@@ -52,8 +52,7 @@ class AuthService {
         data: newUser._id,
       };
     } catch (error) {
-      const { message } = error as Error;
-      return { status: 500, success: false, message };
+      throw new InternalServerErrorException((error as Error).message);
     }
   }
 

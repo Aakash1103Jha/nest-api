@@ -11,7 +11,11 @@ const PORT: string | number = process.env.PORT || 4000;
 
 const bootstrap = async () => {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
   app.setGlobalPrefix('/api');
   app.disable('x-powered-by');
   app.enableCors({
