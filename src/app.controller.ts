@@ -4,7 +4,7 @@ import AppService from './app.service';
 
 const appService = new AppService();
 
-@Controller('/api')
+@Controller('/')
 export class AppController {
   @Get('/')
   getAppRoot() {
