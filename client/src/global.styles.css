@@ -52,3 +52,18 @@ svg {
   box-shadow: inset 0px -3px var(--gray-light);
   padding-bottom: 1rem;
 }
+.auth_cta_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.auth_cta_container button[type='reset'] {
+  background: transparent;
+  border: 1px solid rgb(220, 0, 0);
+  color: rgb(220, 0, 0);
+}
+.auth_cta_container button[type='reset']:hover,
+.auth_cta_container button[type='reset']:active {
+  background: rgb(220, 0, 0);
+  color: inherit;
+}

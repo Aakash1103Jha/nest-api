@@ -1,4 +1,4 @@
-import { FC, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FC, FormEventHandler, useState } from 'react';
 import { Button, Card, Form, Input, Label } from './components';
 
 const Main: FC = () => {
@@ -12,13 +12,24 @@ const Main: FC = () => {
     await navigator.clipboard.writeText(token);
   };
 
-  const clearState = () => {
+  const onEmailChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setError('');
+    setEmail(e.target.value);
+  };
+
+  const onPasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setError('');
+    setPassword(e.target.value);
+  };
+
+  const onResetHandler = () => {
     setApiToken('');
     setError('');
+    setEmail('');
+    setPassword('');
   };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
-    clearState();
     e.preventDefault();
     const _res = await fetch('http://localhost:4002/api/auth/login', {
       body: JSON.stringify({ email, password }),
@@ -29,8 +40,9 @@ const Main: FC = () => {
     });
     if (_res.status === 500) return setError('Something went wrong!');
     const resData = await _res.json();
-    console.log({ resData });
-    return setApiToken(resData.data);
+    setApiToken(resData.data);
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -44,7 +56,7 @@ const Main: FC = () => {
             placeholder="name@example.com"
             required={true}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={onEmailChange}
           />
           <Label label="Password" htmlFor="_password_" isMandatory={true} />
           <Input
@@ -53,14 +65,17 @@ const Main: FC = () => {
             placeholder="**********"
             required={true}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onPasswordChange}
           />
           {error && (
             <div className="error">
               <p>{error}</p>
             </div>
           )}
-          <Button label="Generate Token" />
+          <div className={`auth_cta_container`}>
+            <Button type="reset" label="Reset" onClick={onResetHandler} />
+            <Button label="Generate Token" />
+          </div>
         </Form>
       </div>
       <div>
