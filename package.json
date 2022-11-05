@@ -17,8 +17,9 @@
     "node": ">=16.x.x"
   },
   "scripts": {
+    "build:client": "cd client && npm i && npm run build",
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "npm run build:client && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
